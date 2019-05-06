@@ -15,8 +15,9 @@
 
 <script>
     //import Supplier from '@/components/Supplier'
+    import {format} from 'timeago.js';
 
-    var options = {weekday: "long", year: "numeric", month: "long", day: "numeric", hour:"2-digit", minute:"2-digit"};
+    //var options = {weekday: "long", year: "numeric", month: "long", day: "numeric", hour:"2-digit", minute:"2-digit"};
     var date = new Date()
 
     export default {
@@ -28,13 +29,13 @@
                         id: 1,
                         name: "Fournisseur 1",
                         status: true,
-                        checkedAt: date.toLocaleString("fr-FR", options)
+                        checkedAt: format(date, 'fr-FR', '2019-01-01')
                     },
                     {
                         id: 2,
                         name: "Fournisseur 2",
                         status: false,
-                        checkedAt: date.toLocaleString("fr-FR", options)
+                        checkedAt: format(date, 'fr-FR', '2019-01-01')
                     }
                 ]
             }

@@ -7,15 +7,15 @@
 </template>
 
 <script>
-    var options = {weekday: "long", year: "numeric", month: "long", day: "numeric", hour:"2-digit", minute:"2-digit"};
-    var date = new Date()
+    //var options = {weekday: "long", year: "numeric", month: "long", day: "numeric", hour:"2-digit", minute:"2-digit"};
+    //var date = new Date()
+
     export default {
-        data: function () {
-            return {
-                name: 'Mon fournisseur',
-                status: false, // est ce qu'il y a du stock
-                checkedAt: date.toLocaleString("fr-FR", options) // date de la dernière mise à jour du stock
-            }
+        props:{
+            id : Number,
+            name : String,
+            status : Boolean,
+            checkedAt:String
         }
     }
 </script>

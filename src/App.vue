@@ -4,7 +4,6 @@
     <p>Sélectionner une rubrique</p>
     <router-link to="suppliersList" class="btn btn-primary m-1">Suppliers List</router-link>
     <router-link to="suppliersMap" class="btn btn-primary m-1">Suppliers Map</router-link>
-    <router-link to="supplier" class="btn btn-primary m-1">Supplier</router-link>
     <router-view class="mt-5"></router-view>
   </div>
 </template>

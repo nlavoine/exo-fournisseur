@@ -28,7 +28,8 @@ export default new Router({
     {
       path: '/supplier',
       name: 'supplier',
-      component: Supplier
+      component: Supplier,
+      props: true,
     }
   ]
 })

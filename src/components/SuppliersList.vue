@@ -1,11 +1,23 @@
 <template>
     <div class="container"><h1>Liste des fournisseurs</h1>
-        <ul class="list-unstyled ">
-            <li v-for="item in Suppliers" v-bind:key="item.id" class="mb-2">
-                <div class="card" style="width: 18rem; margin: 0 auto">
+        <div class="input-group mb-3 m-auto" style="width: 15rem;">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Filtrer...</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect01" v-model="selectedFilter" >
+                <option value="all" selected>All</option>
+                <option v-bind:value="true">Ok</option>
+                <option v-bind:value="false">Ko</option>
+            </select>
+        </div>
+        <ul class="list-unstyled mt-3">
+            <li v-for="item in filteredList" v-bind:key="item.id" class="mb-2">
+                <div class="card" style="width: 20rem; margin: 0 auto">
                     <div class="card-body">
-                        <p class="card-text">{{ item.name }}</p>
-                        <router-link :to="{name:'supplier', params: {id:item.id, name:item.name, status:item.status, checkedAt:item.checkedAt} }" class="btn btn-primary">{{ item.name }}</router-link>
+                        <h5 class="card-text">{{ item.name }}</h5>
+                        <!--<router-link :to="{name:'supplier', params: {id:item.id, name:item.name, status:item.status, checkedAt:item.checkedAt} }" class="btn btn-sm btn-primary">En savoir plus</router-link>-->
+
+                        <supplier :id="item.id" :name="item.name" :status="item.status" :checkedAt="item.checkedAt"></supplier>
                     </div>
                 </div>
             </li>
@@ -14,57 +26,37 @@
 </template>
 
 <script>
-    //import Supplier from '@/components/Supplier'
-    import {format} from 'timeago.js';
 
-    //var options = {weekday: "long", year: "numeric", month: "long", day: "numeric", hour:"2-digit", minute:"2-digit"};
-    var date = new Date()
-    const axios = require('axios');
+    import Supplier from "./Supplier";
+
 
     export default {
         name: "SuppliersList.vue",
-        data: function () {
+        components: {Supplier},
+        data:function(){
             return {
-                Suppliers: [
-                    {
-                        id: 1,
-                        name: "Fournisseur 1",
-                        status: true,
-                        checkedAt: format(date, 'fr-FR', '2019-01-01')
-                    },
-                    {
-                        id: 2,
-                        name: "Fournisseur 2",
-                        status: false,
-                        checkedAt: format(date, 'fr-FR', '2019-01-01')
-                    }
-                ],
-                loading: false,
-                error: null,
+                selectedFilter:"all"
             }
         },
-        created: async function () {
-
-            axios.get('https://api-suppliers.herokuapp.com/api/suppliers',
-                {
-                    onDownloadProgress: progressEvent => {
-                        console.log(progressEvent.loaded);
-                    }
-                })
-                .then(function (response) {
-                    // handle success
-                    console.log("My success: " + response);
-                })
-                .catch(function (error) {
-                    // handle error
-                    console.log("My error: " + error);
-                })
-                .then(function () {
-                        // always executed
-                    }
-                );
+        props: {
+            DataSuppliersList: Array
+        },
+        computed: {
+            filteredList: function () {
+                let vm = this
+                let status = vm.selectedFilter
+                if(status === "all") {
+                    return vm.DataSuppliersList
+                }else {
+                    return vm.DataSuppliersList.filter(function(supplier){
+                        console.log(supplier.status === status);
+                        return supplier.status === status
+                    })
+                }
+            }
         }
     }
+
 </script>
 
 <style scoped>

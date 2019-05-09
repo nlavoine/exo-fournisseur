@@ -2,41 +2,43 @@
     <div class="container">
         <h1>Carte des fournisseurs</h1>
         <gmap-map
-            :center="{lat:10, lng:10}"
+            :center="{lat:currPosition.latitude, lng:currPosition.longitude}"
             :zoom="7"
             style="width: 100%; height: 800px"
         >
         <GmapMarker
                 :key="index"
-                v-for="(m, index) in Suppliers"
-                :position="{lat:m.latitude, lng:m.longitude}"
-                :title="m.title"
+                v-for="(m, index) in DataSuppliersList"
+                :position="{lat:parseFloat(m.latitude), lng:parseFloat(m.longitude)}"
+                :title="m.name"
                 :clickable="true"
-                :draggable="true" @click="center={lat:m.latitude, lng:m.longitude}"/>
+                :draggable="false" @click="center={lat:parseFloat(m.latitude), lng:parseFloat(m.longitude)}"/>
     </gmap-map>
     </div>
 </template>
 
 <script>
 
+
+
     export default {
         name: "SuppliersMap.vue",
+        props:{
+            DataSuppliersList : Array
+        },
         data: function () {
             return {
-                Suppliers: [
-                    {
-                        id: 1,
-                        title:"fournisseur 1",
-                        latitude: 10,
-                        longitude: 10
-                    },
-                    {
-                        id: 2,
-                        title:"fournisseur 2",
-                        latitude: 11,
-                        longitude: 9.6
-                    }
-                ]
+                Suppliers: [],
+                currPosition : null
+
+            }
+        },
+
+        mounted: function() {
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(position => {
+                    this.currPosition = position.coords;
+                })
             }
         }
     }

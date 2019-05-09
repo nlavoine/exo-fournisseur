@@ -1,21 +1,28 @@
 <template>
     <div class="hello">
-        <h1>Fournisseur : {{ name }}</h1>
-        <h3 :class="{ green: status, red:!status }">A du stock ? <span v-if="status">OK</span><span v-else>KO</span></h3>
-        <h5>Date de dernier relevé des stocks : {{ checkedAt  }}</h5>
+        <!--<h5>Fournisseur : {{ name }}</h5>-->
+        <button class="btn btn-primary btn-sm" v-on:click="isHidden = !isHidden"><span v-if="isHidden">Afficher les détails</span><span v-if="!isHidden">Masquer les détails</span></button>
+        <div v-show="!isHidden" class="mt-3">
+            <h5 :class="{ green: status, red:!status }">A du stock ? <span v-if="status">OK</span><span v-else>KO</span></h5>
+            <p>Date de dernier relevé des stocks : {{ checkedAt }}</p>
+        </div>
     </div>
 </template>
 
 <script>
-    //var options = {weekday: "long", year: "numeric", month: "long", day: "numeric", hour:"2-digit", minute:"2-digit"};
-    //var date = new Date()
 
     export default {
-        props:{
-            id : Number,
-            name : String,
-            status : Boolean,
-            checkedAt:String
+        props: {
+            id: String,
+            name: String,
+            status: Boolean,
+            checkedAt: String,
+
+        },
+        data: function () {
+            return {
+                isHidden: true
+            }
         }
     }
 </script>

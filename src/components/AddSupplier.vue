@@ -3,6 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-5 mt-3">
                <h2>Add a supplier</h2>
+                <div class="alert alert-danger" role="alert" v-show="axiosError" >An error occurred attempting to create the supplier</div>
                 <form id="creatSupp" class="text-left" @submit="checkForm">
                     <div class="form-group mt-2">
                         <label for="suppName">Email address</label>
@@ -40,13 +41,17 @@
 
 <script>
     const axios = require('axios');
-
+    import router from '../router'
 
     export default {
+        props:{
+            //axiosCall: Function
+        },
         data: function () {
             return {
+                axiosSuccess : false,
+                axiosError : false,
                 errors : [],
-                suppId : null,
                 suppName : null,
                 suppStatus : null,
                 suppLat : null,
@@ -56,7 +61,6 @@
         methods:{
             checkForm(e){
                 this.errors = [];
-                console.log("error start " + this.errors);
 
                 if(!this.suppName){
                     this.errors.push("Please set a supplier name.")
@@ -75,9 +79,8 @@
                 }
             },
             postSupplier(){
-                console.log("postSupplier");
-                let date = new Date()
-
+                let date = new Date();
+                //let vm = this;
                 axios.post('https://api-suppliers.herokuapp.com/api/suppliers', {
                     name: this.suppName,
                     checkedAt: date.toISOString(),
@@ -85,12 +88,22 @@
                     latitude: this.suppLat,
                     longitude: this.suppLng
                 })
-                    .then(function (response) {
-                        console.log(response);
+                    .then(function () {
+                        //this.axiosSuccess = true;
+
+                        router.push({
+                            name: "suppliersList",
+                            /*params:{
+                                axiosSuccess:true
+                            }*/
+                        });
+                        //vm.$root.$Suppliers.unshift(response.data);
+                        this.$root.axiosCall(false);
                     })
                     .catch(function (error) {
                         console.log(error);
-                    });
+                        //vm.axiosError = true;
+                    })
 
             }
         }

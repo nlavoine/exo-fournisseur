@@ -8,7 +8,7 @@
         >
         <GmapMarker
                 :key="index"
-                v-for="(m, index) in DataSuppliersList"
+                v-for="(m, index) in $Suppliers"
                 :position="{lat:parseFloat(m.latitude), lng:parseFloat(m.longitude)}"
                 :title="m.name"
                 :clickable="true"
@@ -24,7 +24,8 @@
     export default {
         name: "SuppliersMap.vue",
         props:{
-            DataSuppliersList : Array
+            //DataSuppliersList : Array,
+            axiosCall: Function
         },
         data: function () {
             return {

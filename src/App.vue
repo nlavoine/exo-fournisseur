@@ -5,10 +5,10 @@
         <router-link to="suppliersList" class="btn btn-primary m-1">Suppliers List</router-link>
         <router-link to="suppliersMap" class="btn btn-primary m-1">Suppliers Map</router-link>
         <router-link to="AddSupplier" class="btn btn-primary m-1">Add a Supplier</router-link>
-        <div class="alert alert-success" role="alert" v-if="success" >Liste Chargée</div>
-        <div class="alert alert-warning" role="alert" v-if="loading" >Chargement de la liste des fournisseurs</div>
-        <div class="alert alert-danger" role="alert" v-if="error"  >{{errorMsg}}</div>
-        <router-view class="mt-5" :DataSuppliersList="Suppliers"></router-view>
+        <!--<div class="alert alert-success" role="alert" v-if="success">Liste Chargée</div>
+        <div class="alert alert-warning" role="alert" v-if="loading">Chargement de la liste des fournisseurs</div>
+        <div class="alert alert-danger" role="alert" v-if="error">{{errorMsg}}</div>-->
+        <router-view class="mt-5"  ></router-view>
     </div>
 </template>
 
@@ -16,7 +16,7 @@
 <script>
     //import HelloWorld from './components/HelloWorld.vue'
 
-    const axios = require('axios');
+    //const axios = require('axios');
 
     export default {
         name: 'app',
@@ -25,41 +25,28 @@
         }*/
         data() {
             return {
-                Suppliers: [],
+                //Suppliers: [],
                 loading: false,
-                error: null,
-                success: null,
+                /*error: null,
+                success: null,*/
                 errorMsg: ""
             }
         },
-
-        beforeCreate: async function () {
-
-            axios.get('https://api-suppliers.herokuapp.com/api/suppliers',
-                {
-                    /*onDownloadProgress: progressEvent => {
-                        this.loading = true;
-                        //console.log("loading : " + progressEvent.loaded);
-                    }*/
-                })
+        beforeCreate: function () {
+            /*console.log("Axios call !");
+            axios.get('https://api-suppliers.herokuapp.com/api/suppliers')
                 .then(response => {
                     // handle success
-                    this.loading = false;
-                    this.success = true;
-                    this.Suppliers = response.data;
-                    //console.log("ok")
+                    this.$root.$Suppliers = response.data;
                 })
                 .catch(error => {
                     // handle error
-                    this.loading = false;
-                    this.error = true;
-                    this.errorMsg = "Erreur lors du chargement de la liste des fournisseurs : " + error
-                })
-                .then(() => {
-                        // always executed
-                    }
-                );
+                    console.log(error)
+                });*/
+            //this.$root.axiosCall()
+
         },
+
     }
 </script>
 

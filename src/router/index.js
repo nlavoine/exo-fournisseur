@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-//import HelloWorld from '@/components/HelloWorld'
+
 import SuppliersList from '@/components/SuppliersList'
 import SuppliersMap from '@/components/SuppliersMap'
 import Supplier from '@/components/Supplier'
@@ -18,12 +18,14 @@ export default new Router({
     {
       path: '/suppliersList',
       name: 'suppliersList',
-      component: SuppliersList
+      component: SuppliersList,
+      props: true,
     },
     {
       path: '/suppliersMap',
       name: 'suppliersMap',
-      component: SuppliersMap
+      component: SuppliersMap,
+      props: true,
     }
     ,
     {
@@ -36,6 +38,7 @@ export default new Router({
       path: '/AddSupplier',
       name: 'addSupplier',
       component: AddSupplier,
+      props: true,
     }
   ]
 })

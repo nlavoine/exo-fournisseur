@@ -4,6 +4,7 @@
         <p>Sélectionner une rubrique</p>
         <router-link to="suppliersList" class="btn btn-primary m-1">Suppliers List</router-link>
         <router-link to="suppliersMap" class="btn btn-primary m-1">Suppliers Map</router-link>
+        <router-link to="AddSupplier" class="btn btn-primary m-1">Add a Supplier</router-link>
         <div class="alert alert-success" role="alert" v-if="success" >Liste Chargée</div>
         <div class="alert alert-warning" role="alert" v-if="loading" >Chargement de la liste des fournisseurs</div>
         <div class="alert alert-danger" role="alert" v-if="error"  >{{errorMsg}}</div>

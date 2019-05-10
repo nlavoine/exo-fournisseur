@@ -6,7 +6,7 @@
                 <div class="alert alert-danger" role="alert" v-show="axiosError" >An error occurred attempting to create the supplier</div>
                 <form id="creatSupp" class="text-left" @submit="checkForm">
                     <div class="form-group mt-2">
-                        <label for="suppName">Email address</label>
+                        <label for="suppName">Supplier Name</label>
                         <input type="text" class="form-control" id="suppName" aria-describedby="suppName" placeholder="Enter supplier's name" v-model="suppName">
                     </div>
                     <div class="form-group mt-5">

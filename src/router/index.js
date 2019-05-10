@@ -5,6 +5,7 @@ import SuppliersList from '@/components/SuppliersList'
 import SuppliersMap from '@/components/SuppliersMap'
 import Supplier from '@/components/Supplier'
 import AddSupplier from '@/components/AddSupplier'
+import EditSupplier from '@/components/EditSupplier'
 
 Vue.use(Router)
 
@@ -38,6 +39,12 @@ export default new Router({
       path: '/AddSupplier',
       name: 'addSupplier',
       component: AddSupplier,
+      props: true,
+    },
+    {
+      path: '/EditSupplier/',
+      name: 'editSupplier',
+      component: EditSupplier,
       props: true,
     }
   ]

@@ -25,7 +25,7 @@ new Vue({
     render: h => h(App),
 
     methods: {
-        axiosCall: async  function(isComponent, target) {
+        axiosCall: function(isComponent, target) {
             console.log("Axios call !");
             axios.get('https://api-suppliers.herokuapp.com/api/suppliers')
                 .then(response => {

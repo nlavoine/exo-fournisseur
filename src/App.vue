@@ -25,27 +25,14 @@
         }*/
         data() {
             return {
-                //Suppliers: [],
+                //Suppliers: this.$root.$Suppliers,
                 loading: false,
                 /*error: null,
                 success: null,*/
                 errorMsg: ""
             }
         },
-        beforeCreate: function () {
-            /*console.log("Axios call !");
-            axios.get('https://api-suppliers.herokuapp.com/api/suppliers')
-                .then(response => {
-                    // handle success
-                    this.$root.$Suppliers = response.data;
-                })
-                .catch(error => {
-                    // handle error
-                    console.log(error)
-                });*/
-            //this.$root.axiosCall()
 
-        },
 
     }
 </script>

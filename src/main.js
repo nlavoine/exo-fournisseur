@@ -6,14 +6,16 @@ const axios = require('axios');
 
 import * as VueGoogleMaps from 'vue2-google-maps'
 
-
-
 Vue.use(VueGoogleMaps, {
     load: {
         key: 'AIzaSyDgQRHUsMFvtkiM91rlD3TJKNyumP0tSn8',
     }
 })
 
+
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false;
 Vue.prototype.$Suppliers = [];
@@ -29,7 +31,7 @@ new Vue({
                 .then(response => {
                     // handle success
                     if(isComponent){
-                        target.suppliersList = response.data;
+                        target.myDatas = response.data;
                     }else {
                         this.$root.$Suppliers = response.data;
                     }

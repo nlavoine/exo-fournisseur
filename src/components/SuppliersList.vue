@@ -10,7 +10,22 @@
                 <option v-bind:value="false">Ko</option>
             </select>
         </div>
-        <div class="alert alert-success mt-5" role="alert" v-if="axiosSuccess">Supplier created successfully</div>
+        <b-alert
+                :show="dismissCountDown"
+                dismissible
+                variant="success"
+                @dismissed="dismissCountDown=0"
+                @dismiss-count-down="countDownChanged"
+        >
+            <p>Supplier created successfully </p>
+            <b-progress
+                    variant="success"
+                    :max="dismissSecs"
+                    :value="dismissCountDown"
+                    height="4px"
+            ></b-progress>
+        </b-alert>
+        <!--<div class="alert alert-success mt-5" role="alert" v-if="axiosSuccess">Supplier created successfully</div>-->
         <ul class="list-unstyled mt-3">
             <li v-for="item in filteredList" v-bind:key="item.id" class="mb-2">
 
@@ -32,29 +47,38 @@
         data: function () {
             return {
                 selectedFilter: "all",
-                suppliersList: this.$root.$Suppliers
+                suppliersList: {
+                    myDatas: []
+                },
+                dismissSecs: 10,
+                dismissCountDown: 0,
             }
         },
         props: {
             axiosSuccess: Boolean,
         },
+        methods:{
+            countDownChanged(dismissCountDown) {
+                this.dismissCountDown = dismissCountDown
+            },
+
+        },
         computed: {
             filteredList: function () {
                 let vm = this;
                 let status = vm.selectedFilter
+                //console.log(vm.suppliersList);
                 if (status === "all") {
-                    console.log(vm.suppliersList);
-                    return vm.suppliersList
+                    return vm.suppliersList.myDatas
                 } else {
-                    return vm.suppliersList.filter(function (supplier) {
+                    return vm.suppliersList.myDatas.filter(function (supplier) {
                         return supplier.status === status
                     })
                 }
             }
         },
-        beforeCreate: async function () {
-
-            this.$root.axiosCall(true, this)
+        mounted: async function () {
+            this.$root.axiosCall(true, this.suppliersList)
 
         },
     }

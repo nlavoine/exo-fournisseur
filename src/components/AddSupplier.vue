@@ -10,7 +10,7 @@
                         <input type="text" class="form-control" id="suppName" aria-describedby="suppName" placeholder="Enter supplier's name" v-model="suppName">
                     </div>
                     <div class="form-group mt-5">
-                        Stock ?
+                        Stock :
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="suppStatus" id="suppStatus1" v-bind:value="true" :selected="true"  v-model="suppStatus">
                             <label class="form-check-label" for="suppStatus1">
@@ -94,7 +94,9 @@
                         router.push({
                             name: "suppliersList",
                             params:{
-                                axiosSuccess:true
+                                axiosSuccess:true,
+                                successMessage : "Supplier created successfully ",
+                                receivedDismissCountDown:10
                             }
                         });
 

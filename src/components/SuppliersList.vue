@@ -5,9 +5,9 @@
                 <label class="input-group-text" for="inputGroupSelect01">Filtrer...</label>
             </div>
             <select class="custom-select" id="inputGroupSelect01" v-model="selectedFilter">
-                <option value="all" selected>All</option>
-                <option v-bind:value="true">Ok</option>
-                <option v-bind:value="false">Ko</option>
+                <option value="all" >All</option>
+                <option v-bind:value="true">Stock Ok</option>
+                <option v-bind:value="false">Stock Ko</option>
             </select>
         </div>
         <b-alert
@@ -16,8 +16,9 @@
                 variant="success"
                 @dismissed="dismissCountDown=0"
                 @dismiss-count-down="countDownChanged"
+                class="mt-4"
         >
-            <p>Supplier created successfully </p>
+            <p>{{ successMessage }}</p>
             <b-progress
                     variant="success"
                     :max="dismissSecs"
@@ -51,11 +52,13 @@
                     myDatas: []
                 },
                 dismissSecs: 10,
-                dismissCountDown: 0,
+                dismissCountDown: this.receivedDismissCountDown,
             }
         },
         props: {
             axiosSuccess: Boolean,
+            successMessage: String,
+            receivedDismissCountDown : Number
         },
         methods:{
             countDownChanged(dismissCountDown) {

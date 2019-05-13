@@ -9,7 +9,7 @@
                         <label for="suppName">Supplier Name</label> <input type="text" class="form-control" id="suppName" aria-describedby="suppName" placeholder="Enter supplier's name" v-model="suppName">
                     </div>
                     <div class="form-group mt-5">
-                        Stock ?
+                        Stock :
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="suppStatus" id="suppStatus1" v-bind:value="true" :selected="true" v-model="suppStatus"> <label class="form-check-label" for="suppStatus1"> True </label>
                         </div>
@@ -36,14 +36,14 @@
 
     export default {
         props: {
-            //supplierId: String
+            supplierId: String
         },
         data: function () {
             return {
                 axiosSuccess: false,
                 axiosError: false,
                 errors: [],
-                supplierId:this.$route.query.supplierId,
+                //supplierId:this.$route.query.supplierId,
                 suppName: null,
                 suppStatus: null,
                 suppLat: null,
@@ -65,20 +65,26 @@
                 }
                 e.preventDefault()
                 if (this.errors.length < 1) {
-                    this.postSupplier();
+                    this.postSupplier(this.supplierId);
                 } else {
                     console.log("error end " + this.errors);
                 }
             },
-            postSupplier() {
+            postSupplier(supplierId) {
                 let date = new Date();
                 //let vm = this;
-                axios.get('https://api-suppliers.herokuapp.com/api/suppliers', {
-                    id: this.suppName,
-                    checkedAt: date.toISOString(),
-                    status: this.suppStatus,
-                    latitude: this.suppLat,
-                    longitude: this.suppLng
+                axios.put('https://api-suppliers.herokuapp.com/api/suppliers/' + supplierId,
+                    {
+                        name: this.suppName,
+                        checkedAt: date.toISOString(),
+                        status: this.suppStatus,
+                        latitude: this.suppLat,
+                        longitude: this.suppLng
+                    },
+                    {
+                    params: {
+                        id: supplierId,
+                    }
                 })
                     .then(function () {
                         //this.axiosSuccess = true;
@@ -86,7 +92,9 @@
                         router.push({
                             name: "suppliersList",
                             params: {
-                                axiosSuccess: true
+                                axiosSuccess: true,
+                                successMessage : "Supplier edited successfully",
+                                receivedDismissCountDown:10
                             }
                         });
 
@@ -102,12 +110,10 @@
 
             let vm = this;
             axios.get('https://api-suppliers.herokuapp.com/api/suppliers/'+vm.supplierId, {
-                /*params: {
-                    id: vm.supplierId,
-                }*/
+
             })
                 .then(function (response) {
-                        console.log(response.data.name)
+
                         vm.suppName=response.data.name;
                         vm.suppStatus=response.data.status;
                         vm.suppLat=response.data.latitude;

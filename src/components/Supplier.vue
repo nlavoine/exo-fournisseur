@@ -17,7 +17,7 @@
                                     <h5 :class="{ green: status, red:!status }">A du stock ? <span v-if="status">OK</span><span v-else>KO</span></h5>
                                     <p>Date de dernier relevé des stocks : {{ checkedAt }}</p>
                                     <!--<button class="btn btn-sm btn- mr-1">Edit supplier</button>-->
-                                    <router-link :to="{name:'editSupplier', query:{supplierId: id} }" class="btn btn-sm btn-warning m-1">Edit supplier</router-link>
+                                    <router-link :to="{name:'editSupplier', params:{supplierId: id} }" class="btn btn-sm btn-warning m-1">Edit supplier</router-link>
                                     <button class="btn btn-sm btn-danger ml-1" @click="deleteSupplier(id)">Delete supplier</button>
                                 </div>
                             </transition>

@@ -42,7 +42,7 @@ export default new Router({
       props: true,
     },
     {
-      path: '/EditSupplier/',
+      path: '/EditSupplier/:supplierId',
       name: 'editSupplier',
       component: EditSupplier,
       props: true,

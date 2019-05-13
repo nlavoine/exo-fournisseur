@@ -18,7 +18,6 @@ import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false;
-Vue.prototype.$Suppliers = [];
 
 new Vue({
     router,

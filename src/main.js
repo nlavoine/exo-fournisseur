@@ -14,6 +14,7 @@ Vue.use(VueGoogleMaps, {
 
 
 import BootstrapVue from 'bootstrap-vue'
+import './registerServiceWorker'
 
 Vue.use(BootstrapVue)
 

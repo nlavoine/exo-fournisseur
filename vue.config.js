@@ -9,11 +9,11 @@ module.exports = {
         appleMobileWebAppStatusBarStyle: 'black',
 
         // configure the workbox plugin
-        workboxPluginMode: 'generateSW',
+        workboxPluginMode: 'GenerateSW',
         workboxOptions: {
             // swSrc is required in InjectManifest mode.
-            swSrc: 'service-worker.js',
-            manifestPath: '/public/manifest.json'
+            //swSrc: 'service-worker.js',
+            //manifestPath: '/public/manifest.json'
         }
     }
 }

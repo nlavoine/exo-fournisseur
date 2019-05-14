@@ -18,14 +18,3 @@ module.exports = {
     }
 }
 
-workbox.routing.registerRoute(
-    new RegExp('^https://api-suppliers.herokuapp.com/api/suppliers'),
-    new workbox.strategies.CacheFirst({
-        cacheName: 'image-cache',
-        plugins: [
-            new workbox.cacheableResponse.Plugin({
-                statuses: [0, 200],
-            })
-        ]
-    })
-);

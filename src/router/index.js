@@ -16,9 +16,7 @@ export default new Router({
       name: 'HelloWorld',
       component: HelloWorld
     },*/
-    {
-      path: 'sw.js',
-    },
+
     {
       path: '/suppliersList',
       name: 'suppliersList',

@@ -17,4 +17,17 @@ module.exports = {
         }
     }
 }
+workbox.routing.registerRoute(
+    new RegExp('https://api-suppliers.herokuapp.com/api/suppliers'),
+    new workbox.strategies.StaleWhileRevalidate({
+        cacheName: 'api-cache',
+        plugins: [
+            new workbox.cacheableResponse.Plugin({
+                headers: {
+                    'X-Is-Cacheable': 'true',
+                },
+            })
+        ]
+    })
+);
 

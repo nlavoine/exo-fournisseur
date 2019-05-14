@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-5 mt-3">
-               <h2>Add a supplier</h2>
+               <h4>Add a supplier</h4>
                 <div class="alert alert-danger" role="alert" v-show="axiosError" >An error occurred attempting to create the supplier</div>
                 <form id="creatSupp" class="text-left" @submit="checkForm">
                     <div class="form-group mt-2">

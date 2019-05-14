@@ -1,5 +1,5 @@
 <template>
-    <div class="container"><h1>Liste des fournisseurs</h1>
+    <div class="container"><h4>Liste des fournisseurs</h4>
         <div class="input-group mb-3 m-auto" style="width: 15rem;">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Filtrer...</label>
@@ -28,11 +28,11 @@
         </b-alert>
         <!--<div class="alert alert-success mt-5" role="alert" v-if="axiosSuccess">Supplier created successfully</div>-->
         <ul class="list-unstyled mt-3">
-            <li v-for="item in filteredList" v-bind:key="item.id" class="mb-2">
+            <li v-for="item in filteredList" v-bind:key="item.id" class="mb-4">
 
                 <!--<router-link :to="{name:'supplier', params: {id:item.id, name:item.name, status:item.status, checkedAt:item.checkedAt} }" class="btn btn-sm btn-primary">En savoir plus</router-link>-->
 
-                <supplier :id="item.id" :name="item.name" :status="item.status" :checkedAt="item.checkedAt"></supplier>
+                <supplier :id="item.id" :name="item.name" :latitude="item.latitude" :longitude="item.longitude" :status="item.status" :checkedAt="item.checkedAt"></supplier>
             </li>
         </ul>
     </div>
@@ -69,19 +69,19 @@
         computed: {
             filteredList: function () {
                 let vm = this;
-                let status = vm.selectedFilter
-                //console.log(vm.suppliersList);
+                let status = vm.selectedFilter;
                 if (status === "all") {
-                    return vm.suppliersList.myDatas
+                    return vm.suppliersList.myDatas;
                 } else {
                     return vm.suppliersList.myDatas.filter(function (supplier) {
                         return supplier.status === status
                     })
+
                 }
             }
         },
         mounted: async function () {
-            this.$root.axiosCall(true, this.suppliersList)
+            this.$root.axiosCall(true, this.suppliersList);
 
         },
     }

@@ -8,19 +8,25 @@
             <div v-show="!isDeleted">
                 <div class="hello">
                     <!--<h5>Fournisseur : {{ name }}</h5>-->
-                    <div class="card" style="width: 20rem; margin: 0 auto">
-                        <div class="card-body">
-                            <h5 class="card-text">{{ name }}</h5>
-                            <button class="btn btn-primary btn-sm" v-on:click="isHidden = !isHidden"><span v-if="isHidden">Afficher les détails</span><span v-if="!isHidden">Masquer les détails</span></button>
+                    <div class="card " style="width: 20rem; margin: 0 auto">
+                        <div class="card-header "  style="background: #ccc;">
+                            <h6 class="card-text">{{ name }}</h6>
+                        </div>
+                        <div class="card-body" style="background: #eaeaea;">
+
+
                             <transition name="fade">
-                                <div v-show="!isHidden" class="mt-3">
-                                    <h5 :class="{ green: status, red:!status }">A du stock ? <span v-if="status">OK</span><span v-else>KO</span></h5>
+                                <div v-show="!isHidden" class="mt-3 mb-3">
+                                    <h6 :class="{ green: status, red:!status }">A du stock ? <b-badge v-if="status" variant="success">OK</b-badge><b-badge v-else variant="danger">KO</b-badge></h6>
                                     <p>Date de dernier relevé des stocks : {{ checkedAt }}</p>
                                     <!--<button class="btn btn-sm btn- mr-1">Edit supplier</button>-->
-                                    <router-link :to="{name:'editSupplier', params:{supplierId: id} }" class="btn btn-sm btn-warning m-1">Edit supplier</router-link>
+                                    <router-link :to="{name:'editSupplier', params:{supplierId: id} }" class="btn btn-sm btn-info m-1">Edit supplier</router-link>
                                     <button class="btn btn-sm btn-danger ml-1" @click="deleteSupplier(id)">Delete supplier</button>
+                                    <hr />
+                                    <router-link :to="{name:'suppliersMap', params:{suppLatitude: latitude, suppLongitude: longitude} }"  class="btn btn-sm btn-outline-secondary m-1">Show on map</router-link>
                                 </div>
                             </transition>
+                            <button class="btn btn-secondary btn-sm" v-on:click="isHidden = !isHidden"><span v-if="isHidden">Show</span><span v-if="!isHidden">Hide</span> details</button>
                         </div>
                     </div>
                 </div>
@@ -36,6 +42,8 @@
         props: {
             id: String,
             name: String,
+            latitude: String,
+            longitude:String,
             status: Boolean,
             checkedAt: String,
         },

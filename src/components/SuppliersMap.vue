@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>Carte des fournisseurs</h1>
+        <h4>Carte des fournisseurs</h4>
         <gmap-map
                 :center="{lat:currPosition.latitude, lng:currPosition.longitude}"
             :zoom="7"
@@ -23,12 +23,16 @@
 
     export default {
         name: "SuppliersMap.vue",
+        props:{
+            suppLatitude : String,
+            suppLongitude : String
+        },
 
         data: function () {
             return {
                 currPosition :{
-                    latitude : 0,
-                    longitude : 0
+                    latitude :  0,
+                    longitude :  0
                 },
                 suppliersList: {
                     myDatas: []
@@ -40,10 +44,15 @@
 
         },
         created: async function () {
-            if(navigator.geolocation){
-                navigator.geolocation.getCurrentPosition(position => {
-                    this.currPosition = position.coords;
-                })
+            if(this.suppLatitude !== undefined){
+                this.currPosition.latitude = parseFloat(this.suppLatitude);
+                this.currPosition.longitude = parseFloat(this.suppLongitude);
+            }else {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(position => {
+                        this.currPosition = position.coords;
+                    })
+                }
             }
             this.$root.axiosCall(true, this.suppliersList)
         },

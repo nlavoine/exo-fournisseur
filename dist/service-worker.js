@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.8b751ce2c3da3f1a403a636251b5e923.js"
+  "/precache-manifest.5f9a71b973d783b1f3ea9002ddf9625e.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "exo-fournisseur"});

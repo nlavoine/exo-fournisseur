@@ -43,6 +43,7 @@ new Vue({
                 })
                 .catch(error => {
                     // handle error
+                    this.$root.$Suppliers = localStorage.getItem('API-cache')
                     console.log(error)
                 });
         }

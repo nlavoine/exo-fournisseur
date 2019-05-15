@@ -35,6 +35,7 @@ new Vue({
             axios.get('https://api-suppliers.herokuapp.com/api/suppliers')
                 .then(response => {
                     // handle success
+                    console.log(localStorage);
                     if(isComponent){
                         target.myDatas = response.data;
                     }else {
@@ -44,6 +45,7 @@ new Vue({
                 .catch(error => {
                     // handle error
                     this.$root.$Suppliers = localStorage.getItem('API-cache')
+                    console.log(localStorage);
                     console.log(error)
                 });
         }

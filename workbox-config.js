@@ -11,6 +11,8 @@ module.exports = {
 
 const workbox = require('workbox');
 
+workbox.precaching.precacheAndRoute([]);
+
 workbox.routing.registerRoute(
     'https://api-suppliers.herokuapp.com/api/suppliers',
     new workbox.strategies.StaleWhileRevalidate({

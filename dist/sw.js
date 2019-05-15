@@ -85,9 +85,17 @@ if (workbox) {
     "revision": "2d85e2b34349ab8f2336a6c656b5933b"
   }
 ]);
+
     workbox.routing.registerRoute(
-        'https://api-suppliers.herokuapp.com/api/suppliers',
-        new workbox.strategies.NetworkFirst(),
+        new RegExp('^https://api-suppliers.herokuapp.com/api/suppliers'),
+        new workbox.strategies.CacheFirst({
+            cacheName: 'API-cache',
+            plugins: [
+                new workbox.cacheableResponse.Plugin({
+                    statuses: [0, 200],
+                })
+            ]
+        })
     );
 
 } else {

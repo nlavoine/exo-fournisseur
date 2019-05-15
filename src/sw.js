@@ -4,9 +4,17 @@ if (workbox) {
     console.log(`Yay! Workbox is loaded 🎉`);
 
     workbox.precaching.precacheAndRoute([]);
+
     workbox.routing.registerRoute(
-        'https://api-suppliers.herokuapp.com/api/suppliers',
-        new workbox.strategies.NetworkFirst(),
+        new RegExp('^https://api-suppliers.herokuapp.com/api/suppliers'),
+        new workbox.strategies.CacheFirst({
+            cacheName: 'API-cache',
+            plugins: [
+                new workbox.cacheableResponse.Plugin({
+                    statuses: [0, 200],
+                })
+            ]
+        })
     );
 
 } else {

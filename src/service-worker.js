@@ -24,7 +24,10 @@ workbox.core.setCacheNameDetails({prefix: "exo-fournisseur"});
  * requests for URLs in the manifest.
  * See https://goo.gl/S9QRab
  */
-self.precaching.precacheAndRoute([]);
+
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
+self.precaching.precacheAndRoute([]);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+
+

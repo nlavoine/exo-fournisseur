@@ -13,6 +13,8 @@
 
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
+const workbox = require('workbox');
+
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
@@ -97,4 +99,26 @@ self.__precacheManifest = [
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 
-
+new workbox.GenerateSW({
+  swDest: 'sw.js',
+  clientsClaim: true,
+  skipWaiting: true,
+  runtimeCaching: [
+    {
+      urlPattern: new RegExp('/'),
+      handler: 'staleWhileRevalidate',
+    },
+    {
+      urlPattern: new RegExp('https://api/'),
+      handler: 'cacheFirst',
+      options: {
+        cacheName: 'api',
+        expiration: {
+          maxEntries: 100,
+          maxAgeSeconds: 72 * 60 * 60
+        },
+        cacheableResponse: { statuses: [0, 200] },
+      }
+    },
+  ]
+})

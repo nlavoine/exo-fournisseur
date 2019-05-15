@@ -9,7 +9,7 @@ module.exports = {
   "swSrc": 'public/sw.js',
 };
 
-const workbox = require('workbox');
+
 
 /*workbox.precaching.precacheAndRoute([]);
 
@@ -26,26 +26,3 @@ workbox.routing.registerRoute(
       ]
     })
 );*/
-new workbox.GenerateSW({
-  swDest: 'sw.js',
-  clientsClaim: true,
-  skipWaiting: true,
-  runtimeCaching: [
-    {
-      urlPattern: new RegExp('/'),
-      handler: 'staleWhileRevalidate',
-    },
-    {
-      urlPattern: new RegExp('https://api/'),
-      handler: 'cacheFirst',
-      options: {
-        cacheName: 'api',
-        expiration: {
-          maxEntries: 100,
-          maxAgeSeconds: 72 * 60 * 60
-        },
-        cacheableResponse: { statuses: [0, 200] },
-      }
-    },
-  ]
-})

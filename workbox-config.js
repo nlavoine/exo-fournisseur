@@ -1,8 +1,11 @@
 module.exports = {
   "globDirectory": "dist/",
   "globPatterns": [
-    "**/*.{css,ico,png,jpg,gif,svg,html,js,json,txt}"
+    "**/*.{css,js,jpg,png,svg}",
   ],
-  "swDest": "dist/service-worker.js",
-  "swSrc": "src/service-worker.js"
+  "swDest": "dist/sw.js",
+  "swSrc": "src/sw.js",
+  "globIgnores": [
+    "./workbox-config.js"
+  ]
 };

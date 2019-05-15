@@ -1,5 +1,5 @@
 
-const Workbox = require('workbox-plugin');
+const workbox = require('workbox');
 
 module.exports = {
   "globDirectory": "public/",

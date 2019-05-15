@@ -1,16 +1,18 @@
 
-const workbox = require('workbox');
 
 module.exports = {
   "globDirectory": "public/",
   "globPatterns": [
     "**/*.{ico,png,svg,html,json,txt}"
   ],
-  "swDest": "public/sw.js"
+  "swDest": "dist/sw.js",
+  "swSrc": 'public/sw.js',
 };
 
+const workbox = require('workbox');
+
 workbox.routing.registerRoute(
-    new RegExp('https://api-suppliers.herokuapp.com/api/suppliers'),
+    'https://api-suppliers.herokuapp.com/api/suppliers',
     new workbox.strategies.StaleWhileRevalidate({
       cacheName: 'api-cache',
       plugins: [

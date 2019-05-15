@@ -28,6 +28,10 @@ workbox.core.setCacheNameDetails({prefix: "exo-fournisseur"});
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 self.precaching.precacheAndRoute([
   {
+    "url": "https://api-suppliers.herokuapp.com/api/suppliers",
+    "revision": "905f9c0e7b02ceae61d04435beec3fca"
+  },
+  {
     "url": "css/app.10e65c8f.css",
     "revision": "905f9c0e7b02ceae61d04435beec3fca"
   },
